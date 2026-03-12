@@ -1,0 +1,24 @@
+name: manual build
+
+on: 
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Configure cmake
+        run: cmake -S . -B build
+
+      - name: build
+        run: cmake --build build
+
+      - name: Run program
+        run: ./build/app.exe
+
+      - name: Dir List
+        run: dir
