@@ -11,11 +11,14 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Configure cmake
-        run: cmake -S . -B build
+      - name: Install Ninja
+        run: choco install ninja
 
-      - name: build
+      - name: Configure CMake with Ninja
+        run: cmake -S . -B build -G "Ninja"
+
+      - name: Build
         run: cmake --build build
 
       - name: Run program
-        run: .\build\app
+        run: build\app.exe
