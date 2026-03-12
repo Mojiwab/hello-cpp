@@ -18,7 +18,7 @@ jobs:
         run: cmake --build build
 
       - name: Run program
-        run: ./build/app.exe
+        run: ./build/app
 
       - name: Dir List
         run: dir
