@@ -1,0 +1,47 @@
+name: Build and Release (C++)
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write  # Needed for creating GitHub releases
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set tag environment variable
+        run: echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+
+      - name: Install Ninja
+        run: choco install ninja -y
+
+      - name: Configure CMake
+        run: cmake -S . -B build -G "Ninja"
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Run program
+        run: build\app.exe
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: myapp
+          path: build/app.exe
+
+      - name: Create or update release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG }}
+          name: Release ${{ env.TAG }}
+          files: build/app.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
