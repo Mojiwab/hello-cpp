@@ -22,3 +22,9 @@ jobs:
 
       - name: Run program
         run: build\app.exe
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: myapp
+          path: build/app.exe
