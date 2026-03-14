@@ -1,4 +1,4 @@
-name:  and Release (C++)
+name: Build and Release (C++)
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - "v*"
 
 permissions:
-  contents: write  # Needed for creating GitHub releases
+  contents: write
 
 jobs:
   build:
@@ -23,19 +23,19 @@ jobs:
         run: choco install ninja -y
 
       - name: Configure CMake
-        run: cmake -S . -B  -G "Ninja"
+        run: cmake -S . -B build -G "Ninja"
 
-      - name: 
-        run: cmake --  --config Release
+      - name: Build
+        run: cmake --build build --config Release
 
       - name: Run program
-        run: app.exe
+        run: .\app.exe
 
       - name: Download latest yt-dlp
         run: |
           curl -L -o yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
 
-      - name: Upload  artifact
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: myapp
@@ -46,10 +46,7 @@ jobs:
 
       - name: Prepare package
         run: |
-          mkdir package
-          mkdir package\data
           mkdir package\data\others
-
           copy app.exe package\
           copy config.json package\
           copy links.txt package\
