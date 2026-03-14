@@ -28,9 +28,6 @@ jobs:
       - name: Build
         run: cmake --build build --config Release
 
-      - name: Run program
-        run: .\app.exe
-
       - name: Download latest yt-dlp
         run: |
           curl -L -o yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
