@@ -1,4 +1,4 @@
-name: Build and Release (C++)
+name:  and Release (C++)
 
 on:
   push:
@@ -23,10 +23,10 @@ jobs:
         run: choco install ninja -y
 
       - name: Configure CMake
-        run: cmake -S . -B build -G "Ninja"
+        run: cmake -S . -B  -G "Ninja"
 
-      - name: Build
-        run: cmake --build build --config Release
+      - name: 
+        run: cmake --  --config Release
 
       - name: Run program
         run: app.exe
@@ -35,11 +35,11 @@ jobs:
         run: |
           curl -L -o yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
 
-      - name: Upload build artifact
+      - name: Upload  artifact
         uses: actions/upload-artifact@v4
         with:
           name: myapp
-          path: build/app.exe
+          path: app.exe
 
       - name: Create empty file
         run: New-Item links.txt -ItemType File
