@@ -1,3 +1,15 @@
 {
-  "greet" : "Hello world!"
+  "paths": {
+    "logs": "logs",
+    "downloads": "data/downloads",
+    "cookie": "data/cookies",
+    "yt_dlp": "data/others/yt-dlp.exe"
+  },
+  "jobs": {
+    "max_retries": 1,
+    "worker_threads": 1
+  },
+  "cookies": {
+    "initial_pool_per_source": 2
+  }
 }
